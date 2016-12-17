@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html ng-app="app" lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title Page</title>
+
+
+</head>
+<h1 class="text-center">A little sample using angular 2</h1>
+<h1 class="text-center">Un petit exemple en utilisant angular 2</h1>
+<div class="container">
+    <div style="width: 49%;float: left;display: block;" >
+<legend>New</legend>
+<div class="form-group">
+    <label for="">Name</label>
+    <input type="text" class="form-control" [(ngModel)]="person.name" placeholder="Name">
+</div>
+<div class="form-group">
+    <label for="">Age</label>
+    <input type="number" class="form-control" [(ngModel)]="person.age" placeholder="Age">
+</div>
+<div class="form-group">
+    <label for="">Country</label>
+    <input type="text" class="form-control" [(ngModel)]="person.country" placeholder="Country">
+</div>
+<button type="submit"  (click)="Add(person)"    class="btn btn-primary">Add</button>
+</div>
+
+<div style="width: 49%;float: right;display: block;" >
+<legend>Filter</legend>
+<div class="form-group">
+    <label for="">Name</label>
+    <input type="text" class="form-control"  [(ngModel)]="filterName" id="" placeholder="Name">
+</div>
+<div class="form-group">
+    <label for="">Age</label>
+    <input type="number" class="form-control" [(ngModel)]="filterAge" id="" placeholder="Age">
+</div>
+<div class="form-group">
+    <label for="">Country</label> {{T}}
+    <select [(ngModel)]="filterCountry" class="form-control">   
+     <option   value="">All</option>
+     <option *ngFor="let person of People |unique:'country'" [value]="person.country">{{person.country}}</option>
+    </select>
+</div>
+</div>
+</div>
+<div class="container">
+    <table class="table table-striped table-hover table-bordered ">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Country</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let person of People 
+             | filter:filterCountry:'country'
+             | filter:filterAge:'age'
+             | filter:filterName:'name'">
+                <td>{{person.name}}</td>
+                <td>{{person.age}}</td>
+                <td>{{person.country}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
